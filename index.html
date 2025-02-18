@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Life 3 - Evolution Fullscreen</title>
+    <script src="https://cdn.jsdelivr.net/npm/ruffle/dist/ruffle.min.js"></script>
+    <style>
+        /* Basic reset for full screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+        }
+        #flash-container {
+            width: 100%;
+            height: 100%;
+        }
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: white;">Duck Life 3 - Evolution</h1>
+    <div id="flash-container" class="fullscreen"></div>
+
+    <script>
+        var ruffle = window.RufflePlayer.newest();
+        var container = document.getElementById("flash-container");
+        var player = ruffle.createPlayer();
+        container.appendChild(player);
+        
+        // Load the SWF file (replace 'DuckLife3Evolution.swf' with the path to your SWF file)
+        player.load("DuckLife3Evolution.swf");
+
+        // Optional: Add fullscreen toggle functionality
+        document.addEventListener("dblclick", function () {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                document.documentElement.requestFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
