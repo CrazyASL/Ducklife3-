@@ -3,51 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duck Life 3 - Evolution Fullscreen</title>
+    <title>Duck Life 3 - Evolution</title>
     <script src="https://cdn.jsdelivr.net/npm/ruffle/dist/ruffle.min.js"></script>
     <style>
-        /* Basic reset for full screen */
+        /* Ensure the page fills the screen and hides overflow */
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
             height: 100%;
-        }
-        #flash-container {
             width: 100%;
-            height: 100%;
         }
-        .fullscreen {
-            position: fixed;
+        
+        /* Fullscreen container for the game */
+        #flash-container {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
+            width: 100vw;  /* Full width */
+            height: 100vh; /* Full height */
+        }
+        
+        /* Optionally, center title above the game */
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 36px;
+            font-family: sans-serif;
         }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center; color: white;">Duck Life 3 - Evolution</h1>
-    <div id="flash-container" class="fullscreen"></div>
+
+    <h1>Duck Life 3 - Evolution</h1>
+
+    <div id="flash-container"></div>
 
     <script>
+        // Create a Ruffle player instance
         var ruffle = window.RufflePlayer.newest();
         var container = document.getElementById("flash-container");
         var player = ruffle.createPlayer();
         container.appendChild(player);
-        
-        // Load the SWF file (replace 'DuckLife3Evolution.swf' with the path to your SWF file)
-        player.load("DuckLife3Evolution.swf");
 
-        // Optional: Add fullscreen toggle functionality
-        document.addEventListener("dblclick", function () {
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            } else {
-                document.documentElement.requestFullscreen();
-            }
-        });
+        // Load the SWF file (ensure the correct path)
+        player.load("DuckLife3Evolution.swf");
+        
+        // Make sure the game is resized to the full size of the viewport
+        function resizeGame() {
+            container.style.width = window.innerWidth + 'px';
+            container.style.height = window.innerHeight + 'px';
+        }
+
+        // Resize game on window resize (in case screen size changes)
+        window.addEventListener('resize', resizeGame);
+
+        // Initial resize
+        resizeGame();
     </script>
+
 </body>
 </html>
